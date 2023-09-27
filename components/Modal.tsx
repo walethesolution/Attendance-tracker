@@ -8,15 +8,71 @@ interface ModalProps {
 
 const Modal = ({ isOpen, onClose }: ModalProps) => {
   const [name, setName] = useState("");
+  const [role, setRole] = useState("Player");
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = (e: { preventDefault: () => void }) => {
+  const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    console.log("form has been submitted", name);
-    setName("");
-    setSubmitted(true);
 
-    onClose();
+    setName("");
+    setRole("Player");
+    setSubmitted(true);
+  };
+
+  const renderContent = () => {
+    if (submitted) {
+      return (
+        <p className="text-gray-500 font-bold mb-4">
+          Thank you, See you Game time!
+        </p>
+      );
+    } else {
+      return (
+        <div className="flex flex-col gap-2">
+          <p className="text-black text-sm font-medium">Enter your name:</p>
+          <form onSubmit={handleSubmit} className="w-full flex flex-col gap-4">
+            <input
+              type="text"
+              value={name}
+              required
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Your name"
+              className="w-full px-6 py-3 border border-gray-300 rounded-xl text-black text-sm"
+            />
+            <div className="flex items-center gap-4 text-black">
+              <label>
+                <input
+                  type="radio"
+                  name="role"
+                  value="Player"
+                  onChange={(e) => setRole(e.target.value)}
+                  checked={role === "Player"}
+                  className="mr-2"
+                />
+                Player
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="role"
+                  value="Fan"
+                  checked={role === "Fan"}
+                  onChange={(e) => setRole(e.target.value)}
+                  className="mr-2"
+                />
+                Fan
+              </label>
+            </div>
+            <button
+              type="submit"
+              className="bg-blue-500 text-white px-6 py-3 rounded-xl text-sm w-full"
+            >
+              Submit
+            </button>
+          </form>
+        </div>
+      );
+    }
   };
 
   return (
@@ -32,31 +88,7 @@ const Modal = ({ isOpen, onClose }: ModalProps) => {
         <button className="text-gray-600 mb-4 text-5xl" onClick={onClose}>
           &times;
         </button>
-        {submitted ? (
-          <p className="text-blue-500 font-bold mb-4">
-            Thank you, See you Game time!
-          </p>
-        ) : (
-          <div className="flex flex-col gap-2">
-            <p className="text-black text-sm font-medium ">Enter your name:</p>
-            <form onSubmit={handleSubmit} className="w-full">
-              <input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="Your name"
-                className="w-full px-6 py-3 mb-4 border border-gray-300 rounded-xl text-black text-sm"
-              />
-            </form>
-            <button
-              type="submit"
-              className="bg-blue-500 text-white px-6 py-3 rounded-xl text-sm w-full"
-              onClick={handleSubmit}
-            >
-              Submit
-            </button>
-          </div>
-        )}
+        {renderContent()}
       </div>
     </div>
   );

@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Playball&display=swap');
 
 :root {
   --foreground-rgb: 0, 0, 0;
@@ -24,4 +25,37 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+}
+
+@keyframes movement {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  75% {
+    transform: scale(1.3);
+  }
+  100% {
+    transform: scale(1); /* Scale back to the original size */
+  }
+}
+
+.home-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("../public/IMG_9513.jpg");
+  background-size: cover;
+  animation: movement 5s infinite ease-in-out;
+}
+
+@media (max-width: 767px) {
+  .home-bg {
+    background-size: 100%; 
+    background-position: center; 
+  }
 }
