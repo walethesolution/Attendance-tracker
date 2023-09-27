@@ -51,7 +51,10 @@ const HomePage = () => {
         <button className="text-gray-300 shadow-md font-normal text-sm text-center">
           Leave a feedback
         </button>
-        <p className="text-gray-300 mt-8 text-sm"> (c) African Stars. 2023</p>
+        <p className="text-gray-300 mt-8 text-sm">
+          {" "}
+          &copy; African Stars. 2023
+        </p>
       </div>
     </div>
   );
