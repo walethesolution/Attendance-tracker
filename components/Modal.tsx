@@ -11,7 +11,7 @@ const Modal = ({ isOpen, onClose }: ModalProps) => {
   const [role, setRole] = useState("Player");
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = async (e: { preventDefault: () => void }) => {
+  const handleSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
 
     setName("");
