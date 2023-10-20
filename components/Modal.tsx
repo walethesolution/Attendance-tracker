@@ -14,6 +14,24 @@ const Modal = ({ isOpen, onClose }: ModalProps) => {
   const handleSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
 
+    try {
+      const response = await fetch("/api/submitData", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, role }),
+      });
+
+      if (response.ok) {
+        console.log("User saved successfully");
+      } else {
+        console.error("Error saving user", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error saving user", error);
+    }
+
     setName("");
     setRole("Player");
     setSubmitted(true);

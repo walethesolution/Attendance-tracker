@@ -11,7 +11,7 @@ const HomePage = () => {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center min-h-screen relative">
+    <div className="flex flex-col justify-center items-center min-h-screen fixed w-full">
       {/* Background image */}
       <div className="absolute inset-0 w-full h-full home-bg" />
 
